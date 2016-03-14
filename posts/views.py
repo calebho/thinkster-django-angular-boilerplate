@@ -16,10 +16,10 @@ class PostViewSet(viewsets.ModelViewSet):
             return (permissions.AllowAny(),)
         return (permissions.IsAuthenticated(), IsAuthorOfPost(),)
 
-	def perform_create(self, serializer):
-	    instance = serializer.save(author=self.request.user)
+    def perform_create(self, serializer):
+        instance = serializer.save(author=self.request.user)
 
-	    return super(PostViewSet, self).perform_create(serializer)
+        return super(PostViewSet, self).perform_create(serializer)
 
 class AccountPostsViewSet(viewsets.ViewSet):
     queryset = Post.objects.select_related('author').all()
@@ -28,6 +28,5 @@ class AccountPostsViewSet(viewsets.ViewSet):
     def list(self, request, account_username=None):
         queryset = self.queryset.filter(author__username=account_username)
         serializer = self.serializer_class(queryset, many=True)
-        
-        return Response(serializer.data)
 
+        return Response(serializer.data)

@@ -57,7 +57,7 @@
      * @memberOf thinkster.posts.services.Posts
      */
     function get(username) {
-      return $http.get('/api/v1/accounts/' + username + '/post_set/');
+      return $http.get('/api/v1/accounts/' + username + '/posts/');
     }
   }
 })();
